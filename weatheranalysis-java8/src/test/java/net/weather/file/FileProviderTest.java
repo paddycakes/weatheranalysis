@@ -1,5 +1,6 @@
 package net.weather.file;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 public class FileProviderTest {
 
@@ -33,21 +36,23 @@ public class FileProviderTest {
         assertThatFileDoesNotExist(FILE_PATH);
 
         // When
-        fileProvider.fromUrl(FILE_URL, FILE_PATH);
+        File file = fileProvider.fromUrl(FILE_URL, FILE_PATH);
 
         // Then
         assertThatFileExists(FILE_PATH);
+        assertThat(file, notNullValue());
+        assertThat(file.getPath(), is(FILE_PATH));
     }
 
 
     // Test DSL
 
     private void assertThatFileExists(String path) {
-        Assert.assertThat(fileExists(path), is(true));
+        assertThat(fileExists(path), is(true));
     }
 
     private void assertThatFileDoesNotExist(String path) {
-        Assert.assertThat(fileExists(path), is(false));
+        assertThat(fileExists(path), is(false));
     }
 
     private boolean fileExists(String path) {

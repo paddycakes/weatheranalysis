@@ -8,7 +8,9 @@ import java.net.URL;
 
 public class FileProvider {
 
-    public void fromUrl(String fileUrl, String path) throws IOException {
-        FileUtils.copyURLToFile(new URL(fileUrl), new File(path));
+    public File fromUrl(String fileUrl, String path) throws IOException {
+        File file = new File(path);
+        FileUtils.copyURLToFile(new URL(fileUrl), file);
+        return file;
     }
 }
