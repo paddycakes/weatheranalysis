@@ -1,4 +1,4 @@
-package net.weather;
+package net.weather.file;
 
 import org.apache.commons.io.FileUtils;
 
